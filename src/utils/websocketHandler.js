@@ -34,7 +34,9 @@ function websocket_message_decoder( message ) {
 	//console.log( decrypted )
 	if ( type === "new_logs" ) {
 		//vm.$data.downloaded.logs = [ ...vm.$data.downloaded.logs , decrypted ]
+		// Mutations vs Actions in Vuex
 		vm.$store.dispatch( "logs/new" , decrypted )
+		//vm.$store.commit( "logs/new" , decrypted )
 	}
 	else if ( type === "new_events" ) {
 		vm.$data.downloaded.events = [ ...vm.$data.downloaded.events , decrypted ]

@@ -1,11 +1,28 @@
 <script>
 	export default {
 		name: 'MasterPassword' ,
-		props: {
-			master_password: String
+		// props: {
+		// 	master_password: String
+		// } ,
+		mounted() {
+			console.log( "MasterPassword Component Was Mounted ???" );
+			// https://www.smashingmagazine.com/2020/01/data-components-vue-js/
+			console.log( this.$store.state.logs.downloaded );
+		} ,
+		// https://vuex.vuejs.org/guide/forms.html#two-way-computed-property
+		computed: {
+			master_password: {
+				get() {
+					console.log( "MasterPassword get()" );
+				} ,
+				set( value ) {
+					console.log( `MasterPassword set( ${ value } )` );
+					this.$store.dispatch( "personal/updateMasterKey" , value );
+					//vm.$store.dispatch( "logs/new" , decrypted )
+				}
+			}
 		}
 	}
-	//this.data.personal.libsodium.private_key
 </script>
 
 <template>
