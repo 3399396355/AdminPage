@@ -1,0 +1,19 @@
+https://github.com/nathantsoi/vue-native-websocket
+
+https://cli.vuejs.org/guide/deployment.html#surge
+
+
+https://vuejs.org/v2/api/#v-for
+
+https://vuejs.org/v2/api/#v-bind
+
+
+https://cli.vuejs.org/guide/creating-a-project.html#vue-create
+
+https://vuejs.org/v2/guide/index.html
+
+
+
+npm run serve
+npm run build
+
