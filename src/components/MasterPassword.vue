@@ -8,6 +8,7 @@
 			console.log( "MasterPassword Component Was Mounted ???" );
 			// https://www.smashingmagazine.com/2020/01/data-components-vue-js/
 			console.log( this.$store.state.logs.downloaded );
+			this.$bvModal.show("password_input");
 		} ,
 		// https://vuex.vuejs.org/guide/forms.html#two-way-computed-property
 		computed: {
@@ -26,11 +27,18 @@
 </script>
 
 <template>
+	<!-- https://bootstrap-vue.js.org/docs/components/modal -->
 	<div id="master_password">
-		<p>Input the Master Password to Decrypt WebSocket Messages</p>
-		<p>{{ master_password }}</p>
-		<input v-model="master_password">
-		<br><br>
-		<b-button variant="success">Save</b-button>
+		<b-modal id="password_input" title="Input the Master Password">
+			<b-container fluid>
+				<b-row>
+					<p>{{ master_password }}</p>
+				</b-row>
+				<b-row>
+					<!-- <input v-model="master_password"> -->
+					<b-form-input v-model="master_password" placeholder="Enter Master Password"></b-form-input>
+				</b-row>
+			</b-container>
+		</b-modal>
 	</div>
 </template>
