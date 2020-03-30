@@ -3,12 +3,17 @@ import Vuex from 'vuex';
 import App from './App.vue'
 import router from './router'
 import VueNativeSock from 'vue-native-websocket'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import './registerServiceWorker'
 import { store } from './store';
 import Personal from '../personal'
 import WebsocketHandler from './utils/websocketHandler.js'
 
+// https://support.apple.com/guide/server/import-a-certificate-identity-apd0c9b2a9d/mac
+//Vue.use( VueNativeSock , `wss://${ Personal.websocket.host }:${ Personal.websocket.port }` , {
 Vue.use( VueNativeSock , `ws://${ Personal.websocket.host }:${ Personal.websocket.port }` , {
 	reconnection: true ,
 	reconnectionAttempts: 5 ,
@@ -17,6 +22,9 @@ Vue.use( VueNativeSock , `ws://${ Personal.websocket.host }:${ Personal.websocke
 })
 
 Vue.config.productionTip = false
+
+Vue.use( BootstrapVue )
+Vue.use( IconsPlugin )
 
 const vm = new Vue({
 	router ,
@@ -41,6 +49,7 @@ const vm = new Vue({
 }).$mount('#app')
 
 vm.$options.sockets.onopen = WebsocketHandler.onopen
+vm.$options.sockets.onerror = WebsocketHandler.onerror
 vm.$options.sockets.onmessage = WebsocketHandler.onmessage
 
 export default vm

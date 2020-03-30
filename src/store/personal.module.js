@@ -3,7 +3,7 @@ export const personal = {
 	namespaced: true ,
 	state: {
 		libsodium: {
-			private_key: false
+			private_key: "NOT SET"
 		}
 	} ,
 	actions: {

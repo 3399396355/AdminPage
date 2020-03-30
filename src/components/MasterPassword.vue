@@ -30,5 +30,7 @@
 		<p>Input the Master Password to Decrypt WebSocket Messages</p>
 		<p>{{ master_password }}</p>
 		<input v-model="master_password">
+		<br><br>
+		<b-button variant="success">Save</b-button>
 	</div>
 </template>
