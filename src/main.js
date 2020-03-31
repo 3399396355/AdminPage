@@ -2,10 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex';
 import App from './App.vue'
 import router from './router'
+
 import VueNativeSock from 'vue-native-websocket'
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// import VueSidebarMenu from 'vue-sidebar-menu'
+// import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 
 import './registerServiceWorker'
 import { store } from './store';
@@ -22,6 +27,8 @@ Vue.use( VueNativeSock , `ws://${ Personal.websocket.host }:${ Personal.websocke
 })
 
 Vue.config.productionTip = false
+
+//Vue.use( VueSidebarMenu )
 
 Vue.use( BootstrapVue )
 Vue.use( IconsPlugin )

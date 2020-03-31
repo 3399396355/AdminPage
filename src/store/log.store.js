@@ -1,6 +1,6 @@
 import { logService } from '../services/log.service.js';
 
-export const logs = {
+export const log = {
 	namespaced: true ,
 	state: {
 		downloaded: []

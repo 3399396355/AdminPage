@@ -1,16 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
 
-// import { alert } from './alert.module';
-// import { authentication } from './authentication.module';
-import { personal } from './personal.module';
-import { logs } from './logs.module';
+import { personal } from './personal.store';
+import { log } from './log.store';
 
 Vue.use( Vuex )
 export const store = new Vuex.Store({
 	modules: {
 		personal ,
-		logs ,
+		log ,
 		//alert,
 		//authentication,
 		//users

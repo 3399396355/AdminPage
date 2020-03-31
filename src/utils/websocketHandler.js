@@ -43,7 +43,7 @@ function try_to_decrypt_data( data ) {
 
 function websocket_message_decoder( message ) {
 	try { message = JSON.parse( message.data ) }
-	catch( e ) { console.log( e ); }
+	catch( e ) { /* // aka not JSON console.log( e ); */ }
 	console.log( message );
 	if ( !message ) { return }
 	let decrypted = [];
@@ -53,34 +53,44 @@ function websocket_message_decoder( message ) {
 	const type = message.message;
 	if ( type === "pong" ) {
 		console.log( "WebSocket Server PONGED! VoHiYo" );
+		return;
 	}
-	else if ( type === "new_logs" ) {
+	if ( type === "new_info" ) {
+		console.log( "Got New Info Passed From Raspberry Pi --> redis.publish() --> sleepVPS --> redis.subscribe() --> socket.broadcast()" );
+		console.log( message );
+		return;
+	}
+	if ( type === "new_logs" ) {
 		//vm.$data.downloaded.logs = [ ...vm.$data.downloaded.logs , decrypted ]
 		// Mutations vs Actions in Vuex
 		vm.$store.dispatch( "logs/new" , decrypted );
 		//vm.$store.commit( "logs/new" , decrypted )
 	}
-	else if ( type === "new_events" ) {
+	if ( type === "new_events" ) {
 		vm.$data.downloaded.events = [ ...vm.$data.downloaded.events , decrypted ]
+		return;
 	}
-	else if ( type === "new_records" ) {
+	if ( type === "new_records" ) {
 		vm.$data.downloaded.records = [ ...vm.$data.downloaded.records , decrypted ]
+		return;
 	}
-	else if ( type === "new_frames" ) {
+	if ( type === "new_frames" ) {
 		vm.$data.downloaded.frames = [ ...vm.$data.downloaded.frames , decrypted ]
+		return;
 	}
-	else if ( type === "new_thresholds" ) {
+	if ( type === "new_thresholds" ) {
 		vm.$data.downloaded.thresholds = [ ...vm.$data.downloaded.thresholds , decrypted ]
+		return;
 	}
-	else if ( type === "new_deltas" ) {
+	if ( type === "new_deltas" ) {
 		vm.$data.downloaded.deltas = [ ...vm.$data.downloaded.deltas , decrypted ]
+		return;
 	}
-	else if ( type === "new_errors" ) {
+	if ( type === "new_errors" ) {
 		vm.$data.downloaded.errors = [ ...vm.$data.downloaded.errors , decrypted ]
+		return;
 	}
-	else {
-		console.log( "No Handler Registered for: " + type );
-	}
+	console.log( "You fucked up. No Handler Registered for: " + type );
 }
 
 const WebsocketHandler = {
