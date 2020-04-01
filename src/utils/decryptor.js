@@ -9,7 +9,7 @@ import vm from '../main.js'
 
 function Decryptor( encrypted_base64_string ) {
 	try {
-        const private_key = vm.$store.state.personal.libsodium.private_key;
+		const private_key = vm.$store.state.personal.libsodium.private_key;
 		const secretKeyBinary = tweetnacl.util.decodeBase64( private_key );
 		const publicKeyBinary = tweetnacl.box.keyPair.fromSecretKey( secretKeyBinary ).publicKey;
 		const decryptMessageBinary = tweetnacl.util.decodeBase64( encrypted_base64_string );

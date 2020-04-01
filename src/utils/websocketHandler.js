@@ -29,12 +29,11 @@ function try_to_decrypt_data( data ) {
 			decrypted = [ single ];
 		}
 		else {
-			let first_try = data.shift();
+			let first_try = data[ 0 ];
 			first_try = Decryptor( first_try );
 			if ( !first_try ) { return false; }
 			//decrypted = data.map( x => Decryptor( Personal.libsodium_private_key , x ) )
 			decrypted = data.map( x => Decryptor( x ) );
-			decrypted.unshift( first_try );
 		}
 		return decrypted
 	}
@@ -81,6 +80,7 @@ function store_decrypted( type , decrypted ) {
 		case "new_info":
 			//console.log( "Got New Info Passed From Raspberry Pi --> redis.publish() --> sleepVPS --> redis.subscribe() --> socket.broadcast()" );
 			vm.$store.dispatch( "info/newDecrypted" , decrypted );
+			console.log( decrypted );
 			break;
 		case "new_events":
 			vm.$store.dispatch( "event/newDecrypted" , decrypted );
@@ -127,7 +127,7 @@ function websocket_message_decoder( message ) {
 		return;
 	}
 	if ( decrypted ) {
-		store_decrypted( type , decrypted );
+		store_decrypted( type , decrypted_data );
 	}
 	else {
 		store_encrypted( type , message.data );
