@@ -18,10 +18,18 @@ export const event = {
 	},
 	mutations: {
 		newDecryptedEvents( state , new_events ) {
-			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_events ];
+			if ( new_events ) {
+				if ( new_events.length > 0 ) {
+					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_events ];
+				}
+			}
 		} ,
 		newEncryptedEvents( state , new_events ) {
-			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_events ];
+			if ( new_events ) {
+				if ( new_events.length > 0 ) {
+					state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_events ];
+				}
+			}
 		} ,
 	}
 }

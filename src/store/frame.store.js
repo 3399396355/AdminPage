@@ -18,10 +18,18 @@ export const frame = {
 	},
 	mutations: {
 		newDecryptedFrames( state , new_frames ) {
-			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_frames ];
+			if ( new_frames ) {
+				if ( new_frames.length > 0 ) {
+					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_frames ];
+				}
+			}
 		} ,
 		newEncryptedFrames( state , new_frames ) {
-			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_frames ];
+			if ( new_frames ) {
+				if ( new_frames.length > 0 ) {
+					state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_frames ];
+				}
+			}
 		} ,
 	}
 }

@@ -1,6 +1,7 @@
 import vm from '../main.js'
 
 import { logService } from './log.service'
+import { infoService } from './info.service'
 import { errorService } from './error.service'
 import { eventService } from './event.service'
 import { frameService } from './frame.service'
@@ -20,12 +21,14 @@ function getToday() {
 
 function tryToDecryptStoredEncrypted() {
 	logService.tryToDecryptStoredEncrypted();
-	// errorService.tryToDecryptStoredEncrypted();
-	// eventService.tryToDecryptStoredEncrypted();
-	// frameService.tryToDecryptStoredEncrypted();
-	// recordService.tryToDecryptStoredEncrypted();
-	// thresholdService.tryToDecryptStoredEncrypted();
-	// deltaService.tryToDecryptStoredEncrypted();
+	infoService.tryToDecryptStoredEncrypted();
+	errorService.tryToDecryptStoredEncrypted();
+	eventService.tryToDecryptStoredEncrypted();
+	frameService.tryToDecryptStoredEncrypted();
+	recordService.tryToDecryptStoredEncrypted();
+	thresholdService.tryToDecryptStoredEncrypted();
+	deltaService.tryToDecryptStoredEncrypted();
+	console.log( vm.$store.state );
 }
 
 export const allService = {

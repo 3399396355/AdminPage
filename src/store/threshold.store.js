@@ -18,10 +18,18 @@ export const threshold = {
 	},
 	mutations: {
 		newDecryptedThresholds( state , new_thresholds ) {
-			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_thresholds ];
+			if ( new_thresholds ) {
+				if ( new_thresholds.length > 0 ) {
+					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_thresholds ];
+				}
+			}
 		} ,
 		newEncryptedThresholds( state , new_thresholds ) {
-			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_thresholds ];
+			if ( new_thresholds ) {
+				if ( new_thresholds.length > 0 ) {
+					state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_thresholds ];
+				}
+			}
 		} ,
 	}
 }

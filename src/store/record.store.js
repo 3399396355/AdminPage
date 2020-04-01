@@ -18,10 +18,18 @@ export const record = {
 	},
 	mutations: {
 		newDecryptedRecords( state , new_records ) {
-			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_records ];
+			if ( new_records ) {
+				if ( new_records.length > 0 ) {
+					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_records ];
+				}
+			}
 		} ,
 		newEncryptedRecords( state , new_records ) {
-			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_records ];
+			if ( new_records ) {
+				if ( new_records.length > 0 ) {
+					state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_records ];
+				}
+			}
 		} ,
 	}
 }

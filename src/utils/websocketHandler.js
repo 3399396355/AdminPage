@@ -46,6 +46,10 @@ function store_encrypted( type , encrypted ) {
 		case "new_logs":
 			vm.$store.dispatch( "log/newEncrypted" , encrypted );
 			break;
+		case "new_info":
+			//console.log( "Got New Info Passed From Raspberry Pi --> redis.publish() --> sleepVPS --> redis.subscribe() --> socket.broadcast()" );
+			vm.$store.dispatch( "info/newEncrypted" , decrypted );
+			break;
 		case "new_events":
 			vm.$store.dispatch( "event/newEncrypted" , encrypted );
 			break;
@@ -73,6 +77,10 @@ function store_decrypted( type , decrypted ) {
 	switch( type ) {
 		case "new_logs":
 			vm.$store.dispatch( "log/newDecrypted" , decrypted );
+			break;
+		case "new_info":
+			//console.log( "Got New Info Passed From Raspberry Pi --> redis.publish() --> sleepVPS --> redis.subscribe() --> socket.broadcast()" );
+			vm.$store.dispatch( "info/newDecrypted" , decrypted );
 			break;
 		case "new_events":
 			vm.$store.dispatch( "event/newDecrypted" , decrypted );
@@ -117,11 +125,6 @@ function websocket_message_decoder( message ) {
 	if ( type === "pong" ) {
 		console.log( "WebSocket Server PONGED! VoHiYo" );
 		return;
-	}
-	if ( type === "new_info" ) {
-		console.log( "Got New Info Passed From Raspberry Pi --> redis.publish() --> sleepVPS --> redis.subscribe() --> socket.broadcast()" );
-		console.log( "We Need to Reroute this Into A known Handler" );
-		console.log( message );
 	}
 	if ( decrypted ) {
 		store_decrypted( type , decrypted );

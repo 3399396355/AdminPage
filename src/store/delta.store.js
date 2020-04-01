@@ -18,10 +18,18 @@ export const delta = {
 	},
 	mutations: {
 		newDecryptedDeltas( state , new_deltas ) {
-			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_deltas ];
+			if ( new_deltas ) {
+				if ( new_deltas.length > 0 ) {
+					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_deltas ];
+				}
+			}
 		} ,
 		newEncryptedDeltas( state , new_deltas ) {
-			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_deltas ];
+			if ( new_deltas ) {
+				if ( new_deltas.length > 0 ) {
+					state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_deltas ];
+				}
+			}
 		} ,
 	}
 }

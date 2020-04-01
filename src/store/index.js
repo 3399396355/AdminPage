@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import { personal } from './personal.store';
 import { log } from './log.store';
+import { info } from './info.store';
 import { error } from './error.store';
 import { event } from './event.store';
 import { record } from './record.store';
@@ -15,6 +16,7 @@ export const store = new Vuex.Store({
 	modules: {
 		personal ,
 		log ,
+		info ,
 		error ,
 		event ,
 		record ,
