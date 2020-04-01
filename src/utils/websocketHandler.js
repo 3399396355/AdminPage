@@ -24,16 +24,16 @@ function try_to_decrypt_data( data ) {
 	try {
 		if ( typeof data === 'string' || data instanceof String ) {
 			//const single = Decryptor( Personal.libsodium_private_key , data );
-			const single = Decryptor( vm.$store.state.personal.libsodium.private_key , data );
+			const single = Decryptor( data );
 			if ( !single ) { return false; }
 			decrypted = [ single ];
 		}
 		else {
 			let first_try = data.shift();
-			first_try = Decryptor( vm.$store.state.personal.libsodium.private_key , first_try );
+			first_try = Decryptor( first_try );
 			if ( !first_try ) { return false; }
 			//decrypted = data.map( x => Decryptor( Personal.libsodium_private_key , x ) )
-			decrypted = data.map( x => Decryptor( vm.$store.state.personal.libsodium.private_key , x ) );
+			decrypted = data.map( x => Decryptor( x ) );
 			decrypted.unshift( first_try );
 		}
 		return decrypted

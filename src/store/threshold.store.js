@@ -19,11 +19,9 @@ export const threshold = {
 	mutations: {
 		newDecryptedThresholds( state , new_thresholds ) {
 			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_thresholds ];
-			console.log( state.downloaded.decrypted );
 		} ,
 		newEncryptedThresholds( state , new_thresholds ) {
 			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_thresholds ];
-			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

@@ -24,7 +24,7 @@
 			toggleModal() {
 				this.$root.$emit( 'bv::toggle::modal' , 'password_input' , '#btnToggle' )
 			} ,
-			onEnter() { // We Need to Call this or at least tryToDecryptStoredEncrypted() on the click event as well
+			onEnter() {
 				// https://vuejs.org/v2/api/#v-on
 				console.log( "Enter key Pressed" );
 				this.$root.$emit( 'bv::hide::modal' , 'password_input' , '#btnShow' )
@@ -36,6 +36,7 @@
 			master_password: {
 				get() {
 					console.log( "MasterPassword get()" );
+					return this.$store.state.personal.libsodium.private_key;
 				} ,
 				set( value ) {
 					console.log( `MasterPassword set( ${ value } )` );
@@ -49,7 +50,7 @@
 
 <template>
 	<!-- https://bootstrap-vue.js.org/docs/components/modal -->
-	<div id="master_password">
+	<div id="master_password_id">
 		<b-container fluid>
 			<b-row class="justify-content-center">
 				<b-button @click="showModal">Enter Password</b-button>
@@ -58,9 +59,9 @@
 
 		<b-modal id="password_input" title="Input the Master Password">
 			<b-container fluid>
-				<b-row>
+<!-- 				<b-row>
 					<p>{{ master_password }}</p>
-				</b-row>
+				</b-row> -->
 				<b-row>
 					<!-- <input v-model="master_password"> -->
 					<b-form-input @keyup.enter="onEnter" v-model="master_password" placeholder="Enter Master Password">
@@ -68,7 +69,7 @@
 				</b-row>
 			</b-container>
 			<template v-slot:modal-footer>
-				<b-button variant="primary" size="sm" class="float-right" @click="onEnter" >
+				<b-button variant="primary" class="float-right" @click="onEnter" >
 					Confirm
 				</b-button>
 			</template>

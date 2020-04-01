@@ -19,11 +19,9 @@ export const delta = {
 	mutations: {
 		newDecryptedDeltas( state , new_deltas ) {
 			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_deltas ];
-			console.log( state.downloaded.decrypted );
 		} ,
 		newEncryptedDeltas( state , new_deltas ) {
 			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_deltas ];
-			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

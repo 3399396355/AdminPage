@@ -19,11 +19,9 @@ export const record = {
 	mutations: {
 		newDecryptedRecords( state , new_records ) {
 			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_records ];
-			console.log( state.downloaded.decrypted );
 		} ,
 		newEncryptedRecords( state , new_records ) {
 			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_records ];
-			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

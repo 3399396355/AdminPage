@@ -19,7 +19,13 @@ function getToday() {
 }
 
 function tryToDecryptStoredEncrypted() {
-	console.log( "To Implement : tryToDecryptStoredEncrypted()" );
+	logService.tryToDecryptStoredEncrypted();
+	// errorService.tryToDecryptStoredEncrypted();
+	// eventService.tryToDecryptStoredEncrypted();
+	// frameService.tryToDecryptStoredEncrypted();
+	// recordService.tryToDecryptStoredEncrypted();
+	// thresholdService.tryToDecryptStoredEncrypted();
+	// deltaService.tryToDecryptStoredEncrypted();
 }
 
 export const allService = {

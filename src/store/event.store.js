@@ -19,11 +19,9 @@ export const event = {
 	mutations: {
 		newDecryptedEvents( state , new_events ) {
 			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_events ];
-			console.log( state.downloaded.decrypted );
 		} ,
 		newEncryptedEvents( state , new_events ) {
 			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_events ];
-			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

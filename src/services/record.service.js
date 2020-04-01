@@ -8,7 +8,7 @@ function getToday() {
 		"starting_position": 0 ,
 		"ending_position": -1 ,
 		"list_key": `sleep.raspi.python.records.${suffix}` ,
-		"channel": "log"
+		"channel": "records"
 	});
 }
 

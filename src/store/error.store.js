@@ -19,11 +19,9 @@ export const error = {
 	mutations: {
 		newDecryptedErrors( state , new_errors ) {
 			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_errors ];
-			console.log( state.downloaded.decrypted );
 		} ,
 		newEncryptedErrors( state , new_errors ) {
 			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_errors ];
-			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

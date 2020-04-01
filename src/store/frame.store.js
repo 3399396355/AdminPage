@@ -19,11 +19,9 @@ export const frame = {
 	mutations: {
 		newDecryptedFrames( state , new_frames ) {
 			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_frames ];
-			console.log( state.downloaded.decrypted );
 		} ,
 		newEncryptedFrames( state , new_frames ) {
 			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_frames ];
-			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }
