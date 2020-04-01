@@ -1,19 +1,29 @@
 import { frameService } from '../services/frame.service.js';
 
-export const error = {
+export const frame = {
 	namespaced: true ,
 	state: {
-		downloaded: []
+		downloaded: {
+			encrypted: [] ,
+			decrypted: []
+		}
 	},
 	actions: {
-		new( { commit } , new_frames ) {
-			commit( 'newEvents' , new_frames );
+		newDecrypted( { commit } , new_frames ) {
+			commit( 'newDecryptedFrames' , new_frames );
+		} ,
+		newEncrypted( { commit } , new_frames ) {
+			commit( 'newEncryptedFrames' , new_frames );
 		}
 	},
 	mutations: {
-		newFrames( state , new_frames ) {
-			state.downloaded = [ ...state.downloaded , ...new_frames ];
-			console.log( state.downloaded );
+		newDecryptedFrames( state , new_frames ) {
+			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_frames ];
+			console.log( state.downloaded.decrypted );
+		} ,
+		newEncryptedFrames( state , new_frames ) {
+			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_frames ];
+			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

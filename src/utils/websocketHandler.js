@@ -1,27 +1,22 @@
 import vm from '../main.js'
 import Decryptor from './decryptor'
-//import Personal from '../../personal'
-//import { store } from '../store';
+
+import { allService } from '../services/all.service'
 
 function on_error( error ) {
 	console.log( error );
 }
 
 function send_ping() {
-	console.log( "Supposedly Connected To WebSocket" );
 	vm.$socket.sendObj({
 		"type": "ping"
 	});
 }
 
-function send_test( data ) {
-	vm.$socket.sendObj({
-		"type": "redis_get_lrange" ,
-		"starting_position": 0 ,
-		"ending_position": -1 ,
-		"list_key": "sleep.log.2020.03.29" ,
-		"channel": "log"
-	})
+function on_open() {
+	console.log( "Supposedly Connected To WebSocket" );
+	send_ping();
+	allService.getToday();
 }
 
 function try_to_decrypt_data( data ) {
@@ -30,15 +25,76 @@ function try_to_decrypt_data( data ) {
 		if ( typeof data === 'string' || data instanceof String ) {
 			//const single = Decryptor( Personal.libsodium_private_key , data );
 			const single = Decryptor( vm.$store.state.personal.libsodium.private_key , data );
+			if ( !single ) { return false; }
 			decrypted = [ single ];
 		}
 		else {
+			let first_try = data.shift();
+			first_try = Decryptor( vm.$store.state.personal.libsodium.private_key , first_try );
+			if ( !first_try ) { return false; }
 			//decrypted = data.map( x => Decryptor( Personal.libsodium_private_key , x ) )
-			decrypted = data.map( x => Decryptor( vm.$store.state.personal.libsodium.private_key , x ) )
+			decrypted = data.map( x => Decryptor( vm.$store.state.personal.libsodium.private_key , x ) );
+			decrypted.unshift( first_try );
 		}
 		return decrypted
 	}
-	catch( e ) { console.log( e ); return decrypted; }
+	catch( e ) { console.log( e ); return false; }
+}
+
+function store_encrypted( type , encrypted ) {
+	switch( type ) {
+		case "new_logs":
+			vm.$store.dispatch( "log/newEncrypted" , encrypted );
+			break;
+		case "new_events":
+			vm.$store.dispatch( "event/newEncrypted" , encrypted );
+			break;
+		case "new_records":
+			vm.$store.dispatch( "record/newEncrypted" , encrypted );
+			break;
+		case "new_frames":
+			vm.$store.dispatch( "frame/newEncrypted" , encrypted );
+			break;
+		case "new_thresholds":
+			vm.$store.dispatch( "threshold/newEncrypted" , encrypted );
+			break;
+		case "new_deltas":
+			vm.$store.dispatch( "delta/newEncrypted" , encrypted );
+			break;
+		case "new_errors":
+			vm.$store.dispatch( "error/newEncrypted" , encrypted );
+			break;
+		default:
+			console.log( "You fucked up. No Handler Registered for: " + type );
+	}
+}
+
+function store_decrypted( type , decrypted ) {
+	switch( type ) {
+		case "new_logs":
+			vm.$store.dispatch( "log/newDecrypted" , decrypted );
+			break;
+		case "new_events":
+			vm.$store.dispatch( "event/newDecrypted" , decrypted );
+			break;
+		case "new_records":
+			vm.$store.dispatch( "record/newDecrypted" , decrypted );
+			break;
+		case "new_frames":
+			vm.$store.dispatch( "frame/newDecrypted" , decrypted );
+			break;
+		case "new_thresholds":
+			vm.$store.dispatch( "threshold/newDecrypted" , decrypted );
+			break;
+		case "new_deltas":
+			vm.$store.dispatch( "delta/newDecrypted" , decrypted );
+			break;
+		case "new_errors":
+			vm.$store.dispatch( "error/newDecrypted" , decrypted );
+			break;
+		default:
+			console.log( "You fucked up. No Handler Registered for: " + type );
+	}
 }
 
 function websocket_message_decoder( message ) {
@@ -46,9 +102,16 @@ function websocket_message_decoder( message ) {
 	catch( e ) { /* // aka not JSON console.log( e ); */ }
 	console.log( message );
 	if ( !message ) { return }
-	let decrypted = [];
+	let encrypted = true;
+	let decrypted = false;
+	let decrypted_data;
 	if ( message.data ) {
-		decrypted = try_to_decrypt_data( message.data );
+		decrypted_data = try_to_decrypt_data( message.data );
+		if ( decrypted_data ) {
+			if ( decrypted_data.length > 0 ) {
+				decrypted = true;
+			}
+		}
 	}
 	const type = message.message;
 	if ( type === "pong" ) {
@@ -57,45 +120,20 @@ function websocket_message_decoder( message ) {
 	}
 	if ( type === "new_info" ) {
 		console.log( "Got New Info Passed From Raspberry Pi --> redis.publish() --> sleepVPS --> redis.subscribe() --> socket.broadcast()" );
+		console.log( "We Need to Reroute this Into A known Handler" );
 		console.log( message );
-		return;
 	}
-	if ( type === "new_logs" ) {
-		//vm.$data.downloaded.logs = [ ...vm.$data.downloaded.logs , decrypted ]
-		// Mutations vs Actions in Vuex
-		vm.$store.dispatch( "logs/new" , decrypted );
-		//vm.$store.commit( "logs/new" , decrypted )
+	if ( decrypted ) {
+		store_decrypted( type , decrypted );
 	}
-	if ( type === "new_events" ) {
-		vm.$data.downloaded.events = [ ...vm.$data.downloaded.events , decrypted ]
-		return;
+	else {
+		store_encrypted( type , message.data );
 	}
-	if ( type === "new_records" ) {
-		vm.$data.downloaded.records = [ ...vm.$data.downloaded.records , decrypted ]
-		return;
-	}
-	if ( type === "new_frames" ) {
-		vm.$data.downloaded.frames = [ ...vm.$data.downloaded.frames , decrypted ]
-		return;
-	}
-	if ( type === "new_thresholds" ) {
-		vm.$data.downloaded.thresholds = [ ...vm.$data.downloaded.thresholds , decrypted ]
-		return;
-	}
-	if ( type === "new_deltas" ) {
-		vm.$data.downloaded.deltas = [ ...vm.$data.downloaded.deltas , decrypted ]
-		return;
-	}
-	if ( type === "new_errors" ) {
-		vm.$data.downloaded.errors = [ ...vm.$data.downloaded.errors , decrypted ]
-		return;
-	}
-	console.log( "You fucked up. No Handler Registered for: " + type );
 }
 
 const WebsocketHandler = {
 	onerror: on_error ,
-	onopen: send_ping ,
+	onopen: on_open ,
 	onmessage: websocket_message_decoder
 }
 

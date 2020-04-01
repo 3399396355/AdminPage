@@ -38,19 +38,8 @@ const vm = new Vue({
 	store ,
 	render: function (h) { return h(App) } ,
 	data: {
-		personal: {
-			libsodium: {
-				private_key: "blah" ,
-			}
-		} ,
-		downloaded: {
-			logs: [] ,
-			events: [] ,
-			records: [] ,
-			frames: [] ,
-			thresholds: [] ,
-			deltas: [] ,
-			errors: [] ,
+		global_state: {
+			loaded: false
 		}
 	}
 }).$mount('#app')

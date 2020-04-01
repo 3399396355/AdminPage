@@ -1,19 +1,29 @@
 import { eventService } from '../services/event.service.js';
 
-export const error = {
+export const event = {
 	namespaced: true ,
 	state: {
-		downloaded: []
+		downloaded: {
+			encrypted: [] ,
+			decrypted: []
+		}
 	},
 	actions: {
-		new( { commit } , new_events ) {
-			commit( 'newEvents' , new_events );
+		newDecrypted( { commit } , new_events ) {
+			commit( 'newDecryptedEvents' , new_events );
+		} ,
+		newEncrypted( { commit } , new_events ) {
+			commit( 'newEncryptedEvents' , new_events );
 		}
 	},
 	mutations: {
-		newEvents( state , new_events ) {
-			state.downloaded = [ ...state.downloaded , ...new_events ];
-			console.log( state.downloaded );
+		newDecryptedEvents( state , new_events ) {
+			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_events ];
+			console.log( state.downloaded.decrypted );
+		} ,
+		newEncryptedEvents( state , new_events ) {
+			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_events ];
+			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

@@ -1,19 +1,29 @@
 import { deltaService } from '../services/delta.service.js';
 
-export const error = {
+export const delta = {
 	namespaced: true ,
 	state: {
-		downloaded: []
+		downloaded: {
+			encrypted: [] ,
+			decrypted: []
+		}
 	},
 	actions: {
-		new( { commit } , new_deltas ) {
-			commit( 'newDeltas' , new_deltas );
+		newDecrypted( { commit } , new_deltas ) {
+			commit( 'newDecryptedDeltas' , new_deltas );
+		} ,
+		newEncrypted( { commit } , new_deltas ) {
+			commit( 'newEncryptedDeltas' , new_deltas );
 		}
 	},
 	mutations: {
-		newDeltas( state , new_deltas ) {
-			state.downloaded = [ ...state.downloaded , ...new_deltas ];
-			console.log( state.downloaded );
+		newDecryptedDeltas( state , new_deltas ) {
+			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_deltas ];
+			console.log( state.downloaded.decrypted );
+		} ,
+		newEncryptedDeltas( state , new_deltas ) {
+			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_deltas ];
+			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

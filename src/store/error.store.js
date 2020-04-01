@@ -3,17 +3,27 @@ import { errorService } from '../services/error.service.js';
 export const error = {
 	namespaced: true ,
 	state: {
-		downloaded: []
+		downloaded: {
+			encrypted: [] ,
+			decrypted: []
+		}
 	},
 	actions: {
-		new( { commit } , new_errors ) {
-			commit( 'newErrors' , new_errors );
+		newDecrypted( { commit } , new_errors ) {
+			commit( 'newDecryptedErrors' , new_errors );
+		} ,
+		newEncrypted( { commit } , new_errors ) {
+			commit( 'newEncryptedErrors' , new_errors );
 		}
 	},
 	mutations: {
-		newErrors( state , new_errors ) {
-			state.downloaded = [ ...state.downloaded , ...new_errors ];
-			console.log( state.downloaded );
+		newDecryptedErrors( state , new_errors ) {
+			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_errors ];
+			console.log( state.downloaded.decrypted );
+		} ,
+		newEncryptedErrors( state , new_errors ) {
+			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_errors ];
+			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }

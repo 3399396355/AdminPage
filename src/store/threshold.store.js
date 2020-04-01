@@ -1,19 +1,29 @@
 import { thresholdService } from '../services/threshold.service.js';
 
-export const error = {
+export const threshold = {
 	namespaced: true ,
 	state: {
-		downloaded: []
+		downloaded: {
+			encrypted: [] ,
+			decrypted: []
+		}
 	},
 	actions: {
-		new( { commit } , new_thresholds ) {
-			commit( 'newRecords' , new_thresholds );
+		newDecrypted( { commit } , new_thresholds ) {
+			commit( 'newDecryptedThresholds' , new_thresholds );
+		} ,
+		newEncrypted( { commit } , new_thresholds ) {
+			commit( 'newEncryptedThresholds' , new_thresholds );
 		}
 	},
 	mutations: {
-		newThresholds( state , new_thresholds ) {
-			state.downloaded = [ ...state.downloaded , ...new_thresholds ];
-			console.log( state.downloaded );
+		newDecryptedThresholds( state , new_thresholds ) {
+			state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_thresholds ];
+			console.log( state.downloaded.decrypted );
+		} ,
+		newEncryptedThresholds( state , new_thresholds ) {
+			state.downloaded.encrypted = [ ...state.downloaded.encrypted , ...new_thresholds ];
+			console.log( state.downloaded.encrypted );
 		} ,
 	}
 }
