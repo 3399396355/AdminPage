@@ -30,7 +30,21 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "log/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.log.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	//console.log( vm.$store.state.log.downloaded.decrypted );
+	for ( let i = 0; i < vm.$store.state.log.downloaded.decrypted.length; ++i ) {
+		//const log_item = JSON.parse( vm.$store.state.log.downloaded.decrypted[ i ] );
+		console.log( vm.$store.state.log.downloaded.decrypted[ i ][ 'message' ] );
+	}
+}
+
 export const logService = {
 	getToday ,
-	tryToDecryptStoredEncrypted
+	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

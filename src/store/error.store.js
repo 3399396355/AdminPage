@@ -20,6 +20,7 @@ export const error = {
 		newDecryptedErrors( state , new_errors ) {
 			if ( new_errors ) {
 				if ( new_errors.length > 0 ) {
+					new_errors = new_errors.map( x => JSON.parse( x ) );
 					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_errors ];
 				}
 			}

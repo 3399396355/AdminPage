@@ -29,7 +29,17 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "record/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.record.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	console.log( vm.$store.state.record.downloaded.decrypted );
+}
+
 export const recordService = {
 	getToday ,
-	tryToDecryptStoredEncrypted
+	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

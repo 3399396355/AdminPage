@@ -29,7 +29,17 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "delta/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.delta.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	console.log( vm.$store.state.delta.downloaded.decrypted );
+}
+
 export const deltaService = {
 	getToday ,
 	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

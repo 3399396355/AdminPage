@@ -1,10 +1,11 @@
 <script>
 	import MasterPassword from '@/components/MasterPassword.vue'
-
+	import CLIButtons from '@/components/CLIButtons.vue'
 	export default {
 		name: 'Test',
 		components: {
-			MasterPassword
+			MasterPassword ,
+			CLIButtons
 		} ,
 		mounted() {
 			console.log( "Test.vue Was Mounted ???" );
@@ -23,5 +24,7 @@
 	<div class="home">
 		<p>Computed Master Password === {{ master_password }}</p>
 		<MasterPassword/>
+		<br><br>
+		<CLIButtons/>
 	</div>
 </template>

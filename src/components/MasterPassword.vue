@@ -9,7 +9,7 @@
 			this.$nextTick( () => {{
 				console.log( "MasterPassword Component Was Mounted ???" );
 				// https://www.smashingmagazine.com/2020/01/data-components-vue-js/
-				this.$bvModal.show( "password_input" );
+				//this.$bvModal.show( "password_input" );
 			}});
 
 		} ,

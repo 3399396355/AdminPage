@@ -29,7 +29,17 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "frame/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.frame.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	console.log( vm.$store.state.frame.downloaded.decrypted );
+}
+
 export const frameService = {
 	getToday ,
 	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

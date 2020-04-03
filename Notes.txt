@@ -12,6 +12,9 @@ https://cli.vuejs.org/guide/creating-a-project.html#vue-create
 
 https://vuejs.org/v2/guide/index.html
 
+Local Persistence
+https://github.com/robinvdvleuten/vuex-persistedstate
+https://github.com/championswimmer/vuex-persist
 
 
 npm run serve

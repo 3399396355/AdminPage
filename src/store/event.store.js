@@ -20,6 +20,7 @@ export const event = {
 		newDecryptedEvents( state , new_events ) {
 			if ( new_events ) {
 				if ( new_events.length > 0 ) {
+					new_events = new_events.map( x => JSON.parse( x ) );
 					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_events ];
 				}
 			}

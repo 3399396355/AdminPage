@@ -23,16 +23,15 @@ function try_to_decrypt_data( data ) {
 	let decrypted = [];
 	try {
 		if ( typeof data === 'string' || data instanceof String ) {
-			//const single = Decryptor( Personal.libsodium_private_key , data );
 			const single = Decryptor( data );
-			if ( !single ) { return false; }
+			if ( !single ) { return false; } // aka empty check
 			decrypted = [ single ];
 		}
 		else {
+			if ( data.length < 1 ) { return false; }
 			let first_try = data[ 0 ];
 			first_try = Decryptor( first_try );
 			if ( !first_try ) { return false; }
-			//decrypted = data.map( x => Decryptor( Personal.libsodium_private_key , x ) )
 			decrypted = data.map( x => Decryptor( x ) );
 		}
 		return decrypted

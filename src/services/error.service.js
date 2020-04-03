@@ -36,7 +36,17 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "error/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.error.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	console.log( vm.$store.state.error.downloaded.decrypted );
+}
+
 export const errorService = {
 	getToday ,
 	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

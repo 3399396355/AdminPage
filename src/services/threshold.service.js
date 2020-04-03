@@ -29,7 +29,17 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "threshold/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.threshold.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	console.log( vm.$store.state.threshold.downloaded.decrypted );
+}
+
 export const thresholdService = {
 	getToday ,
 	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

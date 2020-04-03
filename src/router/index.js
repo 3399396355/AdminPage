@@ -23,6 +23,48 @@ const routes = [
 		component: function () {
 			return import( '../views/Test.vue' )
 		}
+	} ,
+	{
+		path: '/log' ,
+		name: 'Log' ,
+		component: function () {
+			return import( '../views/Log.vue' )
+		}
+	} ,
+	{
+		path: '/events' ,
+		name: 'Events' ,
+		component: function () {
+			return import( '../views/Events.vue' )
+		}
+	} ,
+	{
+		path: '/records' ,
+		name: 'Records' ,
+		component: function () {
+			return import( '../views/Records.vue' )
+		}
+	} ,
+	{
+		path: '/frames' ,
+		name: 'Frames' ,
+		component: function () {
+			return import( '../views/Frames.vue' )
+		}
+	} ,
+	{
+		path: '/thresholds' ,
+		name: 'Thresholds' ,
+		component: function () {
+			return import( '../views/Thresholds.vue' )
+		}
+	} ,
+	{
+		path: '/deltas' ,
+		name: 'Deltas' ,
+		component: function () {
+			return import( '../views/Deltas.vue' )
+		}
 	}
 ]
 

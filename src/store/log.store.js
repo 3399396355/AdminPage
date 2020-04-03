@@ -4,6 +4,7 @@ export const log = {
 	namespaced: true ,
 	state: {
 		downloaded: {
+			message_ids: {} ,
 			decrypted: [] ,
 			encrypted: []
 		}
@@ -20,6 +21,7 @@ export const log = {
 		newDecryptedLogs( state , new_logs ) {
 			if ( new_logs ) {
 				if ( new_logs.length > 0 ) {
+					new_logs = new_logs.map( ( x ) => { x = JSON.parse( x ); console.log( x[ 'message' ] ); return x; } );
 					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_logs ];
 				}
 			}

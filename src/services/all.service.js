@@ -28,10 +28,36 @@ function tryToDecryptStoredEncrypted() {
 	recordService.tryToDecryptStoredEncrypted();
 	thresholdService.tryToDecryptStoredEncrypted();
 	deltaService.tryToDecryptStoredEncrypted();
-	console.log( vm.$store.state );
+	printEncrypted();
+	printDecrypted();
+}
+
+function printEncrypted() {
+	console.log( "Vuex Encrypted Store ===" );
+	logService.printEncrypted();
+	infoService.printEncrypted();
+	errorService.printEncrypted();
+	eventService.printEncrypted();
+	frameService.printEncrypted();
+	recordService.printEncrypted();
+	thresholdService.printEncrypted();
+	deltaService.printEncrypted();
+}
+function printDecrypted() {
+	console.log( "Vuex Decrypted Store ===" );
+	logService.printDecrypted();
+	infoService.printDecrypted();
+	errorService.printDecrypted();
+	eventService.printDecrypted();
+	frameService.printDecrypted();
+	recordService.printDecrypted();
+	thresholdService.printDecrypted();
+	deltaService.printDecrypted();
 }
 
 export const allService = {
 	getToday ,
 	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

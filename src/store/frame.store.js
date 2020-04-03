@@ -20,6 +20,10 @@ export const frame = {
 		newDecryptedFrames( state , new_frames ) {
 			if ( new_frames ) {
 				if ( new_frames.length > 0 ) {
+					new_frames = new_frames.map( x => JSON.parse( x ) );
+					for ( let i = 0; i < new_frames.length; ++i ) {
+						new_frames[ i ][ "image_b64" ] = "data:image/png;base64," + new_frames[ i ][ "image_b64" ];
+					}
 					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_frames ];
 				}
 			}

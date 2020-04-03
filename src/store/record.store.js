@@ -20,6 +20,7 @@ export const record = {
 		newDecryptedRecords( state , new_records ) {
 			if ( new_records ) {
 				if ( new_records.length > 0 ) {
+					new_records = new_records.map( x => JSON.parse( x ) );
 					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_records ];
 				}
 			}

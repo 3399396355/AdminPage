@@ -18,6 +18,16 @@ function tryToDecryptStoredEncrypted() {
 	vm.$store.dispatch( "info/newDecrypted" , success_decrypted );
 }
 
+function printEncrypted() {
+	console.log( vm.$store.state.info.downloaded.encrypted );
+}
+
+function printDecrypted() {
+	console.log( vm.$store.state.info.downloaded.decrypted );
+}
+
 export const infoService = {
-	tryToDecryptStoredEncrypted
+	tryToDecryptStoredEncrypted ,
+	printEncrypted ,
+	printDecrypted ,
 };

@@ -18,6 +18,7 @@ export const info = {
 		newDecryptedInfo( state , new_info ) {
 			if ( new_info ) {
 				if ( new_info.length > 0 ) {
+					 new_info =  new_info.map( x => JSON.parse( x ) );
 					state.downloaded.decrypted = [ ...state.downloaded.decrypted , ...new_info ];
 				}
 			}
